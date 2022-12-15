@@ -1,0 +1,9 @@
+package com.cab.repo;
+
+import java.sql.Driver;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface DriverRepo extends JpaRepository<Driver, Integer> {
+
+}

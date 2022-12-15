@@ -1,0 +1,25 @@
+package com.cab.service;
+
+import java.sql.Driver;
+
+import javax.security.auth.login.LoginException;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.cab.model.LoginDTO;
+import com.cab.model.User;
+import com.cab.repo.UserRepo;
+
+public interface CabService {
+
+	
+	public User registerUser(User user);
+	
+	public String LoginUser(LoginDTO login)throws LoginException;
+	
+	public Driver registerDriver(Driver driver);
+	
+	
+	
+}
+

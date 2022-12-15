@@ -1,0 +1,5 @@
+package com.cab.repo;
+
+public interface Current_User_session_Repo {
+
+}

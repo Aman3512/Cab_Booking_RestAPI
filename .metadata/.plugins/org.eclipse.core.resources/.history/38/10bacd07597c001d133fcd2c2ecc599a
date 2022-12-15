@@ -1,0 +1,57 @@
+package com.cab.service;
+
+import java.sql.Driver;
+import java.util.List;
+
+import javax.security.auth.login.LoginException;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.cab.exception.CabException;
+import com.cab.model.LoginDTO;
+import com.cab.model.User;
+import com.cab.repo.Current_User_session_Repo;
+import com.cab.repo.DriverRepo;
+import com.cab.repo.UserRepo;
+
+public class CabServiceImpl implements CabService {
+
+	@Autowired
+	private UserRepo userRepo;
+	
+	@Autowired
+	private DriverRepo driverRepo;
+	
+	private Current_User_session_Repo sessionRepo;
+	
+	@Override
+	public User registerUser(User user) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String LoginUser(LoginDTO login) throws LoginException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Driver registerDriver(Driver driver) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Driver> getAvailableDrivers(String userSessionKey) throws CabException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String bookRidByDriveriD(Integer driverID, Integer x, Integer y) throws CabException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

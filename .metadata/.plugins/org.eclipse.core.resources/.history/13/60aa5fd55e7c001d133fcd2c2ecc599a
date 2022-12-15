@@ -1,0 +1,29 @@
+package com.cab.service;
+
+import java.sql.Driver;
+import java.util.List;
+
+import javax.security.auth.login.LoginException;
+
+import com.cab.exception.CabException;
+import com.cab.model.LoginDTO;
+import com.cab.model.User;
+
+public interface CabService {
+
+	
+	public User registerUser(User user);
+	
+	public String LoginUser(LoginDTO login)throws LoginException;
+	
+	public boolean authenticateUser(String sessionKey)throws LoginException;
+	
+	public Driver registerDriver(Driver driver);
+	
+	public List<Driver> getAvailableDrivers(String userSessionKey)throws CabException;
+	
+	public String bookRidByDriveriD(Integer driverID, Integer x, Integer y, String sessionKey)throws CabException;
+	
+	
+}
+

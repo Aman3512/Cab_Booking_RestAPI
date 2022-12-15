@@ -1,0 +1,5 @@
+package com.cab.exception;
+
+public class ErrorDetails {
+
+}

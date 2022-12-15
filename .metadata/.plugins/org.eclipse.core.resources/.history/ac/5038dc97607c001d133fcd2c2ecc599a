@@ -1,0 +1,105 @@
+package com.cab.service;
+
+import java.sql.Driver;
+import java.time.LocalDate;
+import java.util.List;
+
+import javax.security.auth.login.LoginException;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.cab.exception.CabException;
+import com.cab.model.Current_User_session;
+import com.cab.model.LoginDTO;
+import com.cab.model.User;
+import com.cab.repo.Current_User_session_Repo;
+import com.cab.repo.DriverRepo;
+import com.cab.repo.UserRepo;
+
+import net.bytebuddy.utility.RandomString;
+
+
+public class CabServiceImpl implements CabService {
+
+	@Autowired
+	private UserRepo userRepo;
+	
+	@Autowired
+	private DriverRepo driverRepo;
+	
+	private Current_User_session_Repo sessionRepo;
+	
+	
+	@Override
+	public User registerUser(User user) {
+		return userRepo.save(user);
+	}
+
+	
+	@Override
+	public String LoginUser(LoginDTO login) throws LoginException {
+		
+		User user = userRepo.findByMobileNo(login.getMobileNo()).orElseThrow( () -> new LoginException("No user found with mobileNO : " + login.getMobileNo()) );
+		
+		sessionRepo.findById(user.getUserID()).orElseThrow( () -> new LoginException("User is already Loged-In..") );
+		
+		if(login.getPassword() == user.getPassword()) {
+			
+			String key = RandomString.make(7);
+			
+			Current_User_session session = new Current_User_session(user.getUserID(), key , LocalDate.now());
+			
+			sessionRepo.save(session);
+			
+			return session.toString();
+		
+		}else
+			throw new LoginException("Wrong password..");
+	}
+
+	
+	@Override
+	public boolean authenticateUser(String sessionKey) throws LoginException {
+		
+		sessionRepo.findByUuid(sessionKey).orElseThrow( () -> new LoginException("User not Logged In .. or Invalid Session Key") );
+		
+		return true;
+	}
+	
+	
+	@Override
+	public Driver registerDriver(Driver driver) {
+		return driverRepo.save(driver);
+	}
+
+	
+	@Override
+	public List<Driver> getAvailableDrivers(String userSessionKey) throws CabException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	
+	@Override
+	public String bookRidByDriveriD(Integer driverID, Integer x, Integer y,String UserSessionKey) throws CabException, LoginException {
+		
+//		Driver driver = driverRepo.findById(driverID).orElseThrow( () -> new CabException("No driver found with id : " + driverID) );
+		
+		com.cab.model.Driver driver = new com.cab.model.Driver();
+		
+		Current_User_session sessionUser = sessionRepo.findByUuid(UserSessionKey).orElseThrow( () -> new LoginException("User not Logged In .. or Invalid Session Key"));
+		
+		User user = userRepo.findById(sessionUser.getUserId()).orElseThrow(()->new CabException("No user found..") ) ;
+		
+		
+        user.setDriver(driver);
+		
+		
+		return "Booked Successfully!";
+		
+	}
+
+
+
+
+}

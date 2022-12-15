@@ -1,0 +1,16 @@
+package com.cab.model;
+
+@Entity
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
+public class Current_User_session {
+
+	@Id
+	private String email;
+	
+	private String uuid;
+	
+	private LocalDate date;
+}

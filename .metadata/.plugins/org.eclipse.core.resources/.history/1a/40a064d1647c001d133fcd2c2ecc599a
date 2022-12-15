@@ -1,0 +1,32 @@
+package com.cab.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.cab.model.User;
+import com.cab.service.CabService;
+
+import io.swagger.v3.oas.annotations.parameters.RequestBody;
+import jakarta.validation.Valid;
+
+@RestController
+@RequestMapping("/masaicab")
+public class CabController {
+
+	@Autowired
+	private CabService service;
+	
+	
+	@PostMapping("/user/register")
+	public ResponseEntity<User> registerUserHandler(@Valid @RequestBody User user){
+		
+		return new ResponseEntity<User>(service.registerUser(user),HttpStatus.CREATED);
+		
+	}
+	
+	
+}

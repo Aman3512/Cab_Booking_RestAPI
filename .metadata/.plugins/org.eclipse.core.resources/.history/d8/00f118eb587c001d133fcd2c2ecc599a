@@ -1,0 +1,9 @@
+package com.cab.repo;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.cab.model.Current_User_session;
+
+public interface Current_User_session_Repo extends JpaRepository<Current_User_session, Integer>{
+
+}
