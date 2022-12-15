@@ -2,7 +2,6 @@
 
 * I have developed this REST API for a Cab Booking Application. This API performs all the fundamental CRUD operations of a Cab Booking platform with user validation at every step.
 
-<br>
 
 ## Tech Stack
 
@@ -14,7 +13,7 @@
 * MySQL
 * Swagger
 
-<br>
+
 
 ## Features
 
@@ -24,7 +23,6 @@
 * Users can search and select one from multiple available rides on a route with the same source and destination based on the nearest to the user.
 * Drivers who are within 5 Kms from the users source will be available for booking.
 
-<br>
 
 ## Installation & Run
 
